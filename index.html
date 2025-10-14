@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PERSAUD AIRLINES - WingLink</title>
 
-  <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Persaud-Airlines/flight-planning/refs/heads/main/output-onlinepngtools%20(1).png">
-
   <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@1,400&display=swap" rel="stylesheet">
 
   <style>
@@ -79,6 +77,88 @@
       background-color: #333;
     }
 
+    /* Document Section */
+    .doc-section {
+      width: 100%;
+      max-width: 900px;
+      margin-top: 40px;
+    }
+
+    .doc-section h3 {
+      font-size: 18px;
+      color: #000;
+      margin-bottom: 15px;
+    }
+
+    .doc-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .doc-chip {
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 8px 15px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .doc-chip:hover {
+      background-color: #e6e6e6;
+      transform: translateY(-2px);
+    }
+
+    /* Modal Viewer */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      width: 90%;
+      max-width: 900px;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal iframe {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .close-btn, .download-btn {
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 100px;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .close-btn:hover, .download-btn:hover {
+      background-color: #333;
+    }
+
     footer {
       width: 100%;
       max-width: 900px;
@@ -100,24 +180,65 @@
 
   <iframe src="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/preview"></iframe>
 
-  <a 
-    href="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/export?format=docx" 
-    class="btn"
-    target="_blank"
-  >
-    Download Documents
-  </a>
+  <a href="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/export?format=docx" class="btn" target="_blank">Download Documents</a>
 
-  <a 
-    href="https://persaud-airlines.github.io/-/index.html" 
-    class="btn"
-    target="_blank"
-  >
-    Visit Website
-  </a>
+  <a href="https://persaud-airlines.github.io/-/index.html" class="btn" target="_blank">Visit Website</a>
+
+  <!-- Document Section -->
+  <div class="doc-section">
+    <hr>
+    <h3>PA-28-161 Documents</h3>
+    <div class="doc-grid" id="docGrid"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="docModal">
+    <div class="modal-content">
+      <iframe id="pdfViewer" src=""></iframe>
+      <div>
+        <button class="download-btn" id="downloadBtn">Download</button>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     © 2025 PERSAUD AIRLINES — All Rights Reserved
   </footer>
+
+  <script>
+    const docs = Array.from({length: 47}, (_, i) => ({
+      name: `POH - Section ${i + 1}`,
+      url: `https://raw.githubusercontent.com/Persaud-Airlines/flight-planning/main/Pilots%20Operating%20Handbook-${i + 1}.pdf`
+    }));
+
+    const grid = document.getElementById('docGrid');
+    const modal = document.getElementById('docModal');
+    const pdfViewer = document.getElementById('pdfViewer');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    docs.forEach(doc => {
+      const chip = document.createElement('div');
+      chip.className = 'doc-chip';
+      chip.textContent = doc.name;
+      chip.onclick = () => openModal(doc.url);
+      grid.appendChild(chip);
+    });
+
+    function openModal(url) {
+      pdfViewer.src = url;
+      downloadBtn.onclick = () => window.open(url, '_blank');
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      pdfViewer.src = '';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) closeModal();
+    }
+  </script>
 </body>
 </html>

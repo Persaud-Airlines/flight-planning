@@ -30,47 +30,21 @@
     body {
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
-      justify-content: flex-start;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* LEFT SIDE */
+    .left {
+      width: 50%;
+      overflow-y: auto;
+      padding: 25px 16px;
+      box-sizing: border-box;
     }
 
     .container{
-      width:65%;
-      max-width:var(--max-w);
-      margin:25px 0 40px 25px;
-      padding:0 16px;
-      box-sizing:border-box;
-      text-align:left;
-    }
-
-    .right-panel{
-      position:sticky;
-      top:0;
-      width:35%;
-      height:100vh;
-      overflow-y:auto;
-      padding:20px 16px;
-      box-sizing:border-box;
-      background:#f0f0f0;
-      border-left:2px solid #000;
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-    }
-
-    .right-panel h3{
-      font-size:16px;
-      margin:0 0 8px;
-      color:var(--accent);
-      text-align:center;
-    }
-
-    .webframe{
       width:100%;
-      height:30vh;
-      border:1px solid #ccc;
-      border-radius:10px;
-      background:#fff;
+      text-align:left;
     }
 
     header h1{
@@ -104,7 +78,6 @@
     .btn{
       display:inline-block;
       width:100%;
-      max-width:var(--max-w);
       margin:14px 0 0;
       padding:12px;
       text-align:center;
@@ -146,6 +119,44 @@
     .thumb-fallback{font-size:13px;color:var(--muted);padding:8px}
     .doc-title{padding:10px 8px;font-size:13px;color:var(--accent);text-align:center;background:#f4f4f4}
 
+    /* RIGHT SIDE PANELS */
+    .right {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: #eaeaea;
+      border-left: 2px solid #000;
+      padding: 20px;
+      box-sizing: border-box;
+      gap: 20px;
+    }
+
+    .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      background: white;
+      overflow: hidden;
+      min-height: 200px;
+    }
+
+    .panel-title {
+      background: #004aad;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .panel iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      overflow: auto;
+    }
+
     /* modal */
     .modal{display:none;position:fixed;z-index:1200;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.72);align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
     .modal.open{display:flex}
@@ -160,8 +171,6 @@
 
     footer{
       width:100%;
-      max-width:var(--max-w);
-      margin:24px 0 40px 25px;
       padding:14px 16px;
       border-top:1px solid #000;
       color:var(--accent);
@@ -171,52 +180,51 @@
 
     @media (max-width:900px){
       body{flex-direction:column;}
-      .right-panel{
-        position:relative;
-        width:100%;
-        height:auto;
-        border-left:none;
-        border-top:2px solid #000;
-        flex-direction:column;
-      }
-      .webframe{height:45vh;}
+      .left,.right{width:100%;height:auto;}
+      .panel iframe{height:45vh;}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>PERSAUD AIRLINES - WingLink</h1>
-      <hr class="sep">
-      <h2>NAVIGATIONAL FLIGHT PLANNING FORM & NAVIGATIONAL ON-BOARD DOCUMENT</h2>
-    </header>
+  <!-- LEFT SIDE -->
+  <div class="left">
+    <div class="container">
+      <header>
+        <h1>PERSAUD AIRLINES - WingLink</h1>
+        <hr class="sep">
+        <h2>NAVIGATIONAL FLIGHT PLANNING FORM & NAVIGATIONAL ON-BOARD DOCUMENT</h2>
+      </header>
 
-    <iframe class="main-doc" src="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/preview" title="WingLink Document"></iframe>
+      <iframe class="main-doc" src="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/preview" title="WingLink Document"></iframe>
 
-    <a class="btn" href="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/export?format=docx" target="_blank" rel="noopener">Download Documents</a>
-    <a class="btn" href="https://persaud-airlines.github.io/-/index.html" target="_blank" rel="noopener">Visit Website</a>
+      <a class="btn" href="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/export?format=docx" target="_blank" rel="noopener">Download Documents</a>
+      <a class="btn" href="https://persaud-airlines.github.io/-/index.html" target="_blank" rel="noopener">Visit Website</a>
 
-    <div class="doc-section" id="docSection">
-      <hr class="sep">
-      <h3>PA-28-161 Documents</h3>
-      <div id="docGrid" class="doc-grid" aria-live="polite"></div>
+      <div class="doc-section" id="docSection">
+        <hr class="sep">
+        <h3>PA-28-161 Documents</h3>
+        <div id="docGrid" class="doc-grid" aria-live="polite"></div>
+      </div>
+
+      <footer>© 2025 PERSAUD AIRLINES — All Rights Reserved</footer>
     </div>
-
-    <footer>© 2025 PERSAUD AIRLINES — All Rights Reserved</footer>
   </div>
 
-  <div class="right-panel">
-    <div>
-      <h3>TWOS Homebase</h3>
-      <iframe class="webframe" src="https://www.twosapp.com/homebase" title="TWOS Homebase"></iframe>
+  <!-- RIGHT SIDE -->
+  <div class="right">
+    <div class="panel">
+      <div class="panel-title">TWOS Homebase</div>
+      <iframe src="https://www.twosapp.com/homebase"></iframe>
     </div>
-    <div>
-      <h3>METAR Central (CYSN)</h3>
-      <iframe class="webframe" src="https://metarcentral.com/airport/CYSN" title="METAR Central"></iframe>
+
+    <div class="panel">
+      <div class="panel-title">METAR Central (CYSN)</div>
+      <iframe src="https://metarcentral.com/airport/CYSN"></iframe>
     </div>
-    <div>
-      <h3>Wingman Reservations</h3>
-      <iframe class="webframe" src="https://wingmanreservations.com" title="Wingman Reservations"></iframe>
+
+    <div class="panel">
+      <div class="panel-title">Wingman Reservations</div>
+      <iframe src="https://wingmanreservations.com"></iframe>
     </div>
   </div>
 
@@ -239,7 +247,7 @@
       "https://drive.google.com/file/d/1Bmh9_BzWuCJap985XPXVOgU4vetAjwsV/view?usp=drive_link",
       "https://drive.google.com/file/d/1i4Eqvw8AcpOLS8NZblhws9RQZb9aDWWP/view?usp=drive_link",
       "https://drive.google.com/file/d/1dTTVnUpYCeUTcYHo0P8u4m6VxYy3tXvj/view?usp=drive_link"
-      /* ... add all your other POH links here (full list retained) ... */
+      /* ... add all your other POH links here ... */
     ];
 
     function extractFileId(url){const m=url.match(/\/d\/([a-zA-Z0-9_-]+)(\/|$)/);return m?m[1]:null;}

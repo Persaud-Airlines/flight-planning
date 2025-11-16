@@ -1,321 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PERSAUD AIRLINES - WingLink</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PERSAUD AIRLINES PORTAL</title>
 
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Persaud-Airlines/flight-planning/refs/heads/main/output-onlinepngtools%20(1).png">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:ital,wght@1,400&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --max-w:900px;
-      --bg:#f8f8f8;
-      --chip-bg:#fff;
-      --chip-border:#ccc;
-      --muted:#666;
-      --accent:#000;
-    }
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:'Oswald',sans-serif;
-      background:var(--bg);
-      -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
-    }
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head><body class="bg-blue-50 text-gray-800 font-sans">
+<body class="bg-gradient-to-b from-blue-150 to-white text-gray-800 font-sans">
 
-    /* Layout container: left main, right sidebar */
-    body {
-      display: flex;
-      flex-direction: row;
-      height: 100vh;
-      overflow: hidden;
-    }
 
-    /* LEFT SIDE */
-    .left {
-      width: 50%;
-      overflow-y: auto;
-      padding: 25px 16px;
-      box-sizing: border-box;
-    }
+<div class="w-full h-full px-6 py-12">
+  <header class="mb-8">
+    <h1 class="text-4xl font-bold italic text-gray-900 mb-4">PERSAUD AIRLINES – WingLink</h1>
+    <hr class="border-gray-300 mb-4">
+    <p class="text-lg text-gray-700 italic">Welcome to the Persaud Airlines Portal, here you can find all the documents and information you need to plan your flights.</p>
+  </header>
 
-    .container{
-      width:100%;
-      text-align:left;
-    }
+  <div class="flex flex-col lg:flex-row gap-4">
 
-    header h1{
-      font-style:italic;
-      font-size:23px;
-      color:var(--accent);
-      margin:0 0 5px;
-      text-align:left;
-    }
-    hr.sep{
-      border:none;
-      border-top:2px solid var(--accent);
-      margin:5px 0 10px;
-    }
-    header h2{
-      font-style:italic;
-      font-size:12px;
-      color:#555;
-      margin:0 0 15px;
-      text-align:left;
-    }
-    iframe.main-doc{
-      width:100%;
-      height:60vh;
-      border:1px solid #ccc;
-      border-radius:10px;
-      background:#fff;
-      display:block;
-    }
+    <!-- Left Column: Main Document & Buttons -->
+    <div class="w-full lg:w-1/2 flex flex-col gap-6">
 
-    .btn{
-      display:inline-block;
-      width:100%;
-      margin:14px 0 0;
-      padding:12px;
-      text-align:center;
-      background:var(--accent);
-      color:#fff;
-      font-size:16px;
-      border:0;
-      border-radius:100px;
-      cursor:pointer;
-      text-decoration:none;
-    }
-    .btn:hover{background:#333}
+      <iframe
+        src="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/preview"
+        class="w-full h-[60vh] border border-gray-200 rounded-lg shadow-sm"
+        title="WingLink Document Preview">
+      </iframe>
 
-    .doc-section{margin-top:30px}
-    .doc-section h3{
-      font-size:18px;
-      color:var(--accent);
-      margin:10px 0;
-      text-align:left;
-    }
-    .doc-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
-      gap:12px;
-    }
-    .doc-chip{
-      background:var(--chip-bg);
-      border:1px solid var(--chip-border);
-      border-radius:10px;
-      overflow:hidden;
-      cursor:pointer;
-      display:flex;
-      flex-direction:column;
-      transition:transform .15s,box-shadow .15s;
-    }
-    .doc-chip:hover{transform:translateY(-4px);box-shadow:0 6px 18px rgba(0,0,0,0.08)}
-    .thumb-wrap{height:110px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#eee,#fafafa);position:relative}
-    .thumb-img{max-width:100%;max-height:100%;display:block;object-fit:cover}
-    .thumb-fallback{font-size:13px;color:var(--muted);padding:8px}
-    .doc-title{padding:10px 8px;font-size:13px;color:var(--accent);text-align:center;background:#f4f4f4}
-
-    /* RIGHT SIDE PANELS */
-    .right {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      background: #eaeaea;
-      border-left: 2px solid #000;
-      padding: 20px;
-      box-sizing: border-box;
-      gap: 20px;
-    }
-
-    .panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      border-radius: 10px;
-      background: white;
-      overflow: hidden;
-      min-height: 200px;
-    }
-
-    .panel-title {
-      background: #004aad;
-      color: white;
-      font-weight: bold;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .panel iframe {
-      flex: 1;
-      width: 100%;
-      border: none;
-      overflow: auto;
-    }
-
-    /* modal */
-    .modal{display:none;position:fixed;z-index:1200;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.72);align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
-    .modal.open{display:flex}
-    .modal-card{width:100%;max-width:980px;background:#fff;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;align-items:stretch}
-    .modal-toolbar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fafafa;border-bottom:1px solid #eee}
-    .modal-title{font-size:15px;color:var(--accent)}
-    .modal-actions{display:flex;gap:8px}
-    .action-btn{background:var(--accent);color:#fff;border:0;border-radius:999px;padding:8px 14px;cursor:pointer}
-    .action-btn.secondary{background:#666}
-    .modal-body{padding:0;background:#fff}
-    .modal-body iframe{width:100%;height:78vh;border:0;display:block}
-
-    footer{
-      width:100%;
-      padding:14px 16px;
-      border-top:1px solid #000;
-      color:var(--accent);
-      font-size:12px;
-      text-align:left;
-    }
-
-    @media (max-width:900px){
-      body{flex-direction:column;}
-      .left,.right{width:100%;height:auto;}
-      .panel iframe{height:45vh;}
-    }
-  </style>
-</head>
-<body>
-  <!-- LEFT SIDE -->
-  <div class="left">
-    <div class="container">
-      <header>
-        <h1>PERSAUD AIRLINES - WingLink</h1>
-        <hr class="sep">
-        <h2>NAVIGATIONAL FLIGHT PLANNING FORM & NAVIGATIONAL ON-BOARD DOCUMENT</h2>
-      </header>
-
-      <iframe class="main-doc" src="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/preview" title="WingLink Document"></iframe>
-
-      <a class="btn" href="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/export?format=docx" target="_blank" rel="noopener">Download Documents</a>
-      <a class="btn" href="https://persaud-airlines.github.io/-/index.html" target="_blank" rel="noopener">Visit Website</a>
-
-      <div class="doc-section" id="docSection">
-        <hr class="sep">
-        <h3>PA-28-161 Documents</h3>
-        <div id="docGrid" class="doc-grid" aria-live="polite"></div>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="https://docs.google.com/document/d/17O5D0rol6EfHXXsrdSZbG2p2Eo5OztSICoKN00WyA_Y/export?format=docx" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-full shadow transition">
+          <i class="fa fa-download"></i>
+          <span>Download Documents</span>
+        </a>
+        <a href="https://persaud-airlines.github.io/-/index.html" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white rounded-full shadow transition">
+          <i class="fa fa-globe"></i>
+          <span>Visit Website</span>
+        </a>
       </div>
 
-      <footer>© 2025 PERSAUD AIRLINES — All Rights Reserved</footer>
-    </div>
-  </div>
+      <section>
+        <hr class="border-gray-300 mb-4">
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">PA‑28‑161 Documents</h2>
+        <div id="docGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+      </section>
 
-  <!-- RIGHT SIDE -->
-  <div class="right">
-    <div class="panel">
-      <div class="panel-title">TWOS Homebase</div>
-      <iframe src="https://www.twosapp.com/homebase"></iframe>
     </div>
 
-    <div class="panel">
-      <div class="panel-title">METAR Central (CYSN)</div>
-      <iframe src="https://metarcentral.com/airport/CYSN"></iframe>
-    </div>
+    <!-- Right Column: 3 Windows -->
+    <div class="w-full lg:w-1/2 flex flex-col gap-6">
 
-    <div class="panel">
-      <div class="panel-title">Wingman Reservations</div>
-      <iframe src="https://wingmanreservations.com"></iframe>
-    </div>
-  </div>
+      <!-- Twosapp Window -->
+      <div class="bg-gray-50 border border-gray-200 rounded-lg shadow overflow-hidden">
+        <div class="bg-gray-100 px-4 py-2 font-medium text-gray-800 flex items-center justify-between">
+          <span>Twosapp</span>
+          <a href="https://www.twosapp.com/6907fd284b16be71f422ea90" target="_blank" rel="noopener" class="text-blue-600 hover:underline text-sm">Open in new tab</a>
+        </div>
+        <iframe src="https://www.twosapp.com/6907fd284b16be71f422ea90" class="w-full h-[750px] border-0"></iframe>
+      </div>
 
-  <!-- MODAL VIEWER -->
-  <div id="viewerModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card" role="document">
-      <div class="modal-toolbar">
-        <div class="modal-title" id="modalTitle">Preview</div>
-        <div class="modal-actions">
-          <button id="downloadBtn" class="action-btn" title="Download">Download</button>
-          <button id="closeBtn" class="action-btn secondary" title="Close">Close</button>
+      <!-- CYSN Aviation Info Window -->
+      <div class="bg-gray-50 border border-gray-200 rounded-lg shadow overflow-auto">
+        <div class="bg-gray-100 px-4 py-2 font-medium text-gray-800 flex items-center justify-between">
+          <span>CYSN Airport Info</span>
+        </div>
+        <div class="p-4 space-y-4 text-sm">
+
+          <div>
+            <h3 class="font-semibold text-gray-900">METAR</h3>
+            <pre id="metar" class="bg-gray-100 p-2 rounded text-gray-800">Loading...</pre>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-gray-900">TAF</h3>
+            <pre id="taf" class="bg-gray-100 p-2 rounded text-gray-800">Loading...</pre>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-gray-900">NOTAMs</h3>
+            <pre id="notams" class="bg-gray-100 p-2 rounded text-gray-800">Loading...</pre>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-gray-900">Airport Diagram</h3>
+            <img src="https://www.navcanada.ca/EN/products-and-services/Pages/aeronautical-information/Canadian-Airport-ICAO-Charts.aspx" alt="CYSN Diagram" class="w-full border rounded">
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-gray-900">Frequencies</h3>
+            <pre class="bg-gray-100 p-2 rounded text-gray-800">
+ATIS: 128.525
+TOWER: 123.250
+EMERGENCY: 121.500
+            </pre>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-gray-900">SIGMETs / AIRMETs</h3>
+            <pre id="sigair" class="bg-gray-100 p-2 rounded text-gray-800">Loading...</pre>
+          </div>
+
         </div>
       </div>
-      <div class="modal-body" id="modalBody"></div>
+
+      <!-- Wingman Window -->
+      <div class="bg-gray-50 border border-gray-200 rounded-lg shadow overflow-hidden">
+        <div class="bg-gray-100 px-4 py-2 font-medium text-gray-800 flex items-center justify-between">
+          <span>Wingman Reservations</span>
+          <a href="https://wingmanreservations.com/login.aspx" target="_blank" rel="noopener" class="text-blue-600 hover:underline text-sm">Open in new tab</a>
+        </div>
+        <iframe src="https://wingmanreservations.com/login.aspx" class="w-full h-[750px] border-0"></iframe>
+      </div>
+
+      <!-- YouTube Window -->
+      <div class="bg-gray-50 border border-gray-200 rounded-lg shadow overflow-hidden">
+        <div class="bg-gray-100 px-4 py-2 font-medium text-gray-800 flex items-center justify-between">
+          <span>Jetstream Journeys - YouTube</span>
+          <a href="https://youtube.com/@jetstreamjourneys1?si=vqb50WBk4uNxuhAb" target="_blank" rel="noopener" class="text-blue-600 hover:underline text-sm">Open in new tab</a>
+        </div>
+        <iframe src="https://youtube.com/@jetstreamjourneys1?si=vqb50WBk4uNxuhAb" class="w-full h-[750px] border-0"></iframe>
+      </div>
+
     </div>
   </div>
 
-  <script>
-    const driveLinks = [
-      "https://drive.google.com/file/d/1Bmh9_BzWuCJap985XPXVOgU4vetAjwsV/view?usp=drive_link",
-      "https://drive.google.com/file/d/1i4Eqvw8AcpOLS8NZblhws9RQZb9aDWWP/view?usp=drive_link",
-      "https://drive.google.com/file/d/1dTTVnUpYCeUTcYHo0P8u4m6VxYy3tXvj/view?usp=drive_link"
-      /* ... add all your other POH links here ... */
-    ];
+  <footer class="max-w-7xl mx-auto px-6 py-8 text-center text-gray-600 text-sm border-t">
+    © 2025 PERSAUD AIRLINES – All rights reserved
+  </footer>
+</div>
 
-    function extractFileId(url){const m=url.match(/\/d\/([a-zA-Z0-9_-]+)(\/|$)/);return m?m[1]:null;}
-    function drivePreviewUrl(id){return `https://drive.google.com/file/d/${id}/preview`;}
-    function driveDownloadUrl(id){return `https://drive.google.com/uc?export=download&id=${id}`;}
-    function driveThumbUrl(id,w=400){return `https://drive.google.com/thumbnail?authuser=0&sz=w${w}&id=${id}`;}
+<!-- MODAL -->
+<div id="viewerModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-70 p-4">
+  <div class="bg-white rounded-lg overflow-hidden w-full max-w-4xl flex flex-col">
+    <div class="flex justify-between items-center bg-gray-100 px-4 py-2 border-b">
+      <h3 id="modalTitle" class="font-semibold text-gray-900">Preview</h3>
+      <div class="flex gap-2">
+        <button id="downloadBtn" class="px-3 py-1 bg-gray-800 text-white rounded-full text-sm">Download</button>
+        <button id="closeBtn" class="px-3 py-1 bg-gray-400 text-white rounded-full text-sm">Close</button>
+      </div>
+    </div>
+    <div id="modalBody" class="flex-1 p-0">
+      <!-- iframe goes here -->
+    </div>
+  </div>
+</div>
 
-    const grid=document.getElementById('docGrid');
-    driveLinks.forEach((link,idx)=>{
-      const id=extractFileId(link);
-      const n=idx+1;
-      const title=`POH - Section ${n}`;
-      const chip=document.createElement('div');
-      chip.className='doc-chip';
-      chip.dataset.fileId=id||'';
-      chip.dataset.fullLink=link;
-      const thumbWrap=document.createElement('div');
-      thumbWrap.className='thumb-wrap';
-      if(id){
-        const img=document.createElement('img');
-        img.className='thumb-img';
-        img.alt=title+' thumbnail';
-        img.loading='lazy';
-        img.src=driveThumbUrl(id,300);
-        img.onerror=function(){this.remove();const f=document.createElement('div');f.className='thumb-fallback';f.textContent='PDF Preview';thumbWrap.appendChild(f);};
-        thumbWrap.appendChild(img);
-      }else{
-        const f=document.createElement('div');
-        f.className='thumb-fallback';
-        f.textContent='PDF Preview';
-        thumbWrap.appendChild(f);
-      }
-      const titleDiv=document.createElement('div');
-      titleDiv.className='doc-title';
-      titleDiv.textContent=title;
-      chip.appendChild(thumbWrap);
-      chip.appendChild(titleDiv);
-      chip.addEventListener('click',()=>openPreview(id,title));
-      grid.appendChild(chip);
-    });
+<script>
+  const AVWX_KEY = "3XSq-UNpoGPuqn9sw_8KmWa2VcpRhUiiZgQaoH--0T8";
+  const station = "CYSN";
 
-    const modal=document.getElementById('viewerModal');
-    const modalTitle=document.getElementById('modalTitle');
-    const modalBody=document.getElementById('modalBody');
-    const downloadBtn=document.getElementById('downloadBtn');
-    const closeBtn=document.getElementById('closeBtn');
+  async function fetchMetar() {
+    try {
+      const res = await fetch(`https://avwx.rest/api/metar/${station}?token=${AVWX_KEY}`);
+      const data = await res.json();
+      document.getElementById("metar").textContent = data.raw || "No METAR available";
+    } catch(e) { document.getElementById("metar").textContent = "Error fetching METAR"; }
+  }
 
-    function openPreview(fileId,title){
-      modalTitle.textContent=title||'Preview';
-      modalBody.innerHTML='';
-      const iframe=document.createElement('iframe');
-      iframe.src=drivePreviewUrl(fileId);
-      iframe.loading='eager';
-      iframe.style.border='0';
-      modalBody.appendChild(iframe);
-      downloadBtn.onclick=()=>window.open(driveDownloadUrl(fileId),'_blank','noopener');
-      modal.classList.add('open');
-      closeBtn.focus();
+  async function fetchTaf() {
+    try {
+      const res = await fetch(`https://avwx.rest/api/taf/${station}?token=${AVWX_KEY}`);
+      const data = await res.json();
+      document.getElementById("taf").textContent = data.raw || "No TAF available";
+    } catch(e) { document.getElementById("taf").textContent = "Error fetching TAF"; }
+  }
+
+  async function fetchSigAirmet() {
+    try {
+      const res = await fetch(`https://avwx.rest/api/forecasts/taf/${station}?token=${AVWX_KEY}`);
+      const data = await res.json();
+      document.getElementById("sigair").textContent = JSON.stringify(data,null,2) || "No SIGMET/AIRMET available";
+    } catch(e) { document.getElementById("sigair").textContent = "Error fetching SIGMET/AIRMET"; }
+  }
+
+  fetchMetar(); fetchTaf(); fetchSigAirmet();
+
+  const driveLinks = [
+  "https://drive.google.com/file/d/1yttKgC30H--U38Cfj3tC21i5-cf-MYPO/view?usp=drive_link",
+      "https://drive.google.com/file/d/1cK3sR8LJKUfuUJzIRrn4p9MOuJ-26seo/view?usp=drive_link",
+      "https://drive.google.com/file/d/1Ko45j27UHbekq-YoKGj6yntuAhgSueF3/view?usp=drive_link",
+      "https://drive.google.com/file/d/1ajV2M8oN2pQ6KoaGwG1PYeth4TR9L_5C/view?usp=drive_link",
+      "https://drive.google.com/file/d/1xFDoSc236nbkvVBJh-9zUcuGEesTGWUZ/view?usp=drive_link",
+      "https://drive.google.com/file/d/1MNdNRJwuH8LyE4_ZX0lppfDf9yTBdcZT/view?usp=drive_link",
+      "https://drive.google.com/file/d/1c0sminiiHcrEOZlHLOGunsygP0gijlnO/view?usp=drive_link",
+      "https://drive.google.com/file/d/1BWA3ohe57pbCbxmzvTkt1z65lHJ2_ZIe/view?usp=drive_link",
+      "https://drive.google.com/file/d/1TvdPg2mnho8yavq_iWjHmwDWTTOx2KQA/view?usp=drive_link",
+      "https://drive.google.com/file/d/1wZShIVzbH0XoDggCl_T_XobQyOpv7vdK/view?usp=drive_link",
+      "https://drive.google.com/file/d/1Uw6CpLgBKxpcsPh2M8MydF2Kmqz-aSr0/view?usp=drive_link",
+      "https://drive.google.com/file/d/1jXsJGOwrncJY__S4_Cc9Y57zVNSK32V6/view?usp=drive_link",
+      "https://drive.google.com/file/d/1diRa96j1kvQFHdCPlNEa5q9M5SquMZBO/view?usp=drive_link",
+      "https://drive.google.com/file/d/1fW5vhaiJMOQ4n9Q2UO_8GUGL-eDyWKCm/view?usp=drive_link",
+      "https://drive.google.com/file/d/1XQtDogPgY-o2ph3VhJvCpZLrU_lJH3DC/view?usp=drive_link",
+      "https://drive.google.com/file/d/1K-RgcWA0RAEV-KYuD_cvDUm5KB0--g4X/view?usp=drive_link",
+      "https://drive.google.com/file/d/1vs2AQK06TncSWdb-p_oK5Cw_929HiRnj/view?usp=drive_link",
+      "https://drive.google.com/file/d/1J9DMNxSGC7FLQSb6aytLDNkmuvvkj62L/view?usp=drive_link",
+      "https://drive.google.com/file/d/13oNG8fE7lgQbIWYCVBmMLpIUU8iydYpJ/view?usp=drive_link",
+      "https://drive.google.com/file/d/1rreY_L-E3YBMAlUvbclh3Uv-MixxyqK6/view?usp=drive_link"
+  ];
+
+  function extractFileId(url){const m=url.match(/\/d\/([a-zA-Z0-9_-]+)/);return m?m[1]:null;}
+  function drivePreviewUrl(id){return `https://drive.google.com/file/d/${id}/preview`;}
+  function driveDownloadUrl(id){return `https://drive.google.com/uc?export=download&id=${id}`;}
+  function driveThumbUrl(id){return `https://drive.google.com/thumbnail?authuser=0&sz=w300&id=${id}`;}
+
+  const grid = document.getElementById('docGrid');
+  const modal = document.getElementById('viewerModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const closeBtn = document.getElementById('closeBtn');
+
+  function openPreview(fileId,title){
+    modalTitle.textContent = title||'Preview';
+    modalBody.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = drivePreviewUrl(fileId);
+    iframe.className = 'w-full h-[80vh] border-0';
+    modalBody.appendChild(iframe);
+
+    downloadBtn.onclick = ()=>window.open(driveDownloadUrl(fileId),'_blank','noopener');
+    modal.classList.remove('hidden'); modal.classList.add('flex');
+  }
+
+  function closeModal(){
+    modal.classList.remove('flex'); modal.classList.add('hidden');
+    modalBody.innerHTML = '';
+  }
+
+  closeBtn.addEventListener('click',closeModal);
+  modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+  window.addEventListener('keydown',e=>{if(e.key==='Escape' && modal.classList.contains('flex')) closeModal();});
+
+  driveLinks.forEach((link,idx)=>{
+    const id = extractFileId(link);
+    const title = `POH - Section ${idx+1}`;
+    const card = document.createElement('div');
+    card.className='bg-gray-50 rounded-lg shadow hover:shadow-md cursor-pointer overflow-hidden flex flex-col';
+    const thumbWrapper = document.createElement('div');
+    thumbWrapper.className='h-28 flex items-center justify-center bg-gray-200';
+    if(id){
+      const img = document.createElement('img');
+      img.src = driveThumbUrl(id);
+      img.alt = title;
+      img.loading='lazy';
+      img.className='max-w-full max-h-full object-contain';
+      img.onerror = () => { img.remove(); const fallback = document.createElement('i'); fallback.className='fa fa-file-pdf text-gray-400 text-3xl'; thumbWrapper.appendChild(fallback); };
+      thumbWrapper.appendChild(img);
+    } else {
+      const fallback = document.createElement('i');
+      fallback.className='fa fa-file-pdf text-gray-400 text-3xl';
+      thumbWrapper.appendChild(fallback);
     }
+    const titleDiv = document.createElement('div');
+    titleDiv.className='p-3 text-center text-gray-900 font-medium';
+    titleDiv.textContent = title;
+    card.appendChild(thumbWrapper); card.appendChild(titleDiv);
+    card.addEventListener('click',()=>openPreview(id,title));
+    grid.appendChild(card);
+  });
+</script>
 
-    function closeModal(){
-      modal.classList.remove('open');
-      modalBody.innerHTML='';
-    }
-
-    closeBtn.addEventListener('click',closeModal);
-    modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
-    window.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();});
-  </script>
 </body>
 </html>
